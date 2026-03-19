@@ -14,6 +14,15 @@ html,body{
   overflow:hidden;
   font-family: "Segoe UI", sans-serif;
 }
+  .particle{
+  position:fixed;
+  width:4px;
+  height:4px;
+  background:white;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:1;
+}
 
 /* ===== SAO NGẪU NHIÊN ===== */
 .star{
@@ -30,15 +39,46 @@ html,body{
 
 /* ===== PHÁO HOA ===== */
 .firework{
-  position:fixed;
-  font-size:18px;
-  animation: boom 1.5s ease-out forwards;
-  z-index:1;
+  <script>
+function createFirework(){
+  const x = Math.random()*window.innerWidth;
+  const y = Math.random()*window.innerHeight;
+
+  const colors = ["#ff4d6d","#ffd166","#7b2cbf","#00f5d4","#ff9f1c"];
+
+  for(let i=0;i<25;i++){
+    const p = document.createElement("div");
+    p.className = "particle";
+
+    const angle = Math.random()*2*Math.PI;
+    const distance = Math.random()*80 + 40;
+
+    const dx = Math.cos(angle)*distance;
+    const dy = Math.sin(angle)*distance;
+
+    p.style.left = x + "px";
+    p.style.top = y + "px";
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+
+    document.body.appendChild(p);
+
+    p.animate([
+      {transform:"translate(0,0)", opacity:1},
+      {transform:`translate(${dx}px,${dy}px)`, opacity:0}
+    ],{
+      duration:1200,
+      easing:"ease-out"
+    });
+
+    setTimeout(()=>p.remove(),1200);
+  }
 }
-@keyframes boom{
-  0%{transform:scale(0); opacity:1}
-  100%{transform:scale(2.5); opacity:0}
-}
+
+/* bắn pháo ngẫu nhiên */
+setInterval(()=>{
+  createFirework();
+}, 900);
+</script>
 
 /* ===== CHỮ BAY ===== */
 .text{
@@ -147,7 +187,7 @@ setInterval(() => {
   setTimeout(() => {
     text.remove();
   }, 18000);
-}, 3000);
+}, 2500);
 
 /* ===== SAO NGẪU NHIÊN ===== */
 setInterval(() => {
