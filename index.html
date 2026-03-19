@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -14,71 +14,26 @@ html,body{
   overflow:hidden;
   font-family: "Segoe UI", sans-serif;
 }
-  .particle{
-  position:fixed;
-  width:4px;
-  height:4px;
-  background:white;
-  border-radius:50%;
-  pointer-events:none;
-  z-index:1;
-}
 
-/* ===== SAO NGẪU NHIÊN ===== */
+/* ===== SAO RANDOM ===== */
 .star{
   position:fixed;
   color:white;
-  font-size:8px;
   animation: twinkle 2s infinite alternate;
-  z-index:0;
 }
 @keyframes twinkle{
   from{opacity:0.2}
   to{opacity:1}
 }
 
-/* ===== PHÁO HOA ===== */
-.firework{
-  <script>
-function createFirework(){
-  const x = Math.random()*window.innerWidth;
-  const y = Math.random()*window.innerHeight;
-
-  const colors = ["#ff4d6d","#ffd166","#7b2cbf","#00f5d4","#ff9f1c"];
-
-  for(let i=0;i<25;i++){
-    const p = document.createElement("div");
-    p.className = "particle";
-
-    const angle = Math.random()*2*Math.PI;
-    const distance = Math.random()*80 + 40;
-
-    const dx = Math.cos(angle)*distance;
-    const dy = Math.sin(angle)*distance;
-
-    p.style.left = x + "px";
-    p.style.top = y + "px";
-    p.style.background = colors[Math.floor(Math.random()*colors.length)];
-
-    document.body.appendChild(p);
-
-    p.animate([
-      {transform:"translate(0,0)", opacity:1},
-      {transform:`translate(${dx}px,${dy}px)`, opacity:0}
-    ],{
-      duration:1200,
-      easing:"ease-out"
-    });
-
-    setTimeout(()=>p.remove(),1200);
-  }
+/* ===== PARTICLE PHÁO ===== */
+.particle{
+  position:fixed;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  pointer-events:none;
 }
-
-/* bắn pháo ngẫu nhiên */
-setInterval(()=>{
-  createFirework();
-}, 900);
-</script>
 
 /* ===== CHỮ BAY ===== */
 .text{
@@ -89,7 +44,6 @@ setInterval(()=>{
   color:#ff9ad5;
   text-shadow:0 0 10px #ff69b4, 0 0 20px #c77dff;
   animation: flyUp 18s linear forwards;
-  z-index:2;
 }
 @keyframes flyUp{
   from{transform:translateY(0); opacity:0}
@@ -97,7 +51,7 @@ setInterval(()=>{
   to{transform:translateY(-120vh); opacity:0}
 }
 
-/* ===== BÁNH KEM ===== */
+/* ===== BÁNH ===== */
 #cake{
   position:fixed;
   bottom:90px;
@@ -105,8 +59,7 @@ setInterval(()=>{
   transform:translateX(-50%);
   text-align:center;
   font-size:42px;
-  z-index:3;
-  color:pink;
+  z-index:5;
 }
 #candle{
   cursor:pointer;
@@ -124,99 +77,183 @@ setInterval(()=>{
   left:50%;
   transform:translateX(-50%);
   padding:12px 22px;
-  font-size:16px;
   background:linear-gradient(45deg,#ff69b4,#c77dff);
   color:white;
   border:none;
   border-radius:25px;
-  box-shadow:0 0 15px pink;
-  z-index:10;
 }
 </style>
 </head>
 
 <body>
 
-<!-- BÁNH KEM -->
 <div id="cake">
   🎂
   <div id="candle" onclick="blow()">🕯️</div>
   <p>Thổi nến đi Hồng Sơn ✨</p>
 </div>
 
-<!-- NHẠC -->
-<button id="playMusic">🎵 Bật nhạc piano</button>
+<button id="playMusic">🎵 Bật nhạc</button>
 <audio id="bgMusic" loop>
   <source src="nhac.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-/* ===== BẬT NHẠC ===== */
-const btn = document.getElementById("playMusic");
-const music = document.getElementById("bgMusic");
-btn.onclick = () => {
-  music.play();
-  btn.style.display = "none";
-};
+/* ===== NHẠC ===== */
+playMusic.onclick = ()=>{
+  bgMusic.play();
+  playMusic.style.display="none";
+}
 
 /* ===== THỔI NẾN ===== */
 function blow(){
-  document.getElementById("candle").innerHTML="💨";
+  candle.innerHTML="💨";
   alert("🎉 Chúc mừng sinh nhật Hồng Sơn 🎉");
 }
 
+/* ===== SAO RANDOM ===== */
+setInterval(()=>{
+  const s=document.createElement("div");
+  s.className="star";
+  s.innerHTML="✦";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.fontSize=(Math.random()*8+6)+"px";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),2000);
+},200);
+
 /* ===== CHỮ BAY ===== */
-const messages = [
-  "🎂 Sinh nhật vui vẻ Hồng Sơn",
-  "💖 Chúc Hồng Sơn luôn hạnh phúc",
-  "✨ Tuổi mới nhiều niềm vui",
-  "🌸 Luôn bình an và mỉm cười",
-  "💫 Mong may mắn luôn đến với Sơn",
-  "🌷 Cuộc sống sẽ nhẹ nhàng hơn với Sơn",
-  "💪 Khoẻ mạnh là quan trọng nhất",
-  "🎉 Một năm mới thật dịu dàng và an yên"
+const messages=[
+"🎂 Sinh nhật vui vẻ Hồng Sơn",
+"💖 Chúc Hồng Sơn luôn hạnh phúc",
+"✨ Tuổi mới nhiều niềm vui",
+"🌸 Luôn bình an",
+"💫 May mắn đến với Sơn",
+"🌷 Dịu dàng và an yên",
+"💪 Luôn khoẻ mạnh",
+"🎉 Một năm tuyệt vời"
 ];
 
-setInterval(() => {
-  const text = document.createElement("div");
-  text.className = "text";
-  text.innerText = messages[Math.floor(Math.random()*messages.length)];
-  text.style.left = Math.random()*80 + "vw";
-  document.body.appendChild(text);
+setInterval(()=>{
+  const t=document.createElement("div");
+  t.className="text";
+  t.innerText=messages[Math.random()*messages.length|0];
+  t.style.left=Math.random()*80+"vw";
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),18000);
+},3000);
 
-  setTimeout(() => {
-    text.remove();
-  }, 18000);
-}, 2500);
+/* ===== PHÁO BAY LÊN ===== */
+function launchFirework(){
+  const startX=Math.random()*window.innerWidth;
+  const rocket=document.createElement("div");
 
-/* ===== SAO NGẪU NHIÊN ===== */
-setInterval(() => {
-  const star = document.createElement("div");
-  star.className = "star";
-  star.innerHTML = "✦";
+  rocket.style.position="fixed";
+  rocket.style.left=startX+"px";
+  rocket.style.bottom="0px";
+  rocket.style.width="3px";
+  rocket.style.height="10px";
+  rocket.style.background="white";
 
-  star.style.left = Math.random()*100 + "vw";
-  star.style.top = Math.random()*100 + "vh";
-  star.style.fontSize = (Math.random()*8 + 6) + "px";
+  document.body.appendChild(rocket);
 
-  document.body.appendChild(star);
+  const targetY=Math.random()*window.innerHeight*0.6;
 
-  setTimeout(()=>star.remove(), 2000);
-}, 200);
+  rocket.animate([
+    {transform:"translateY(0)"},
+    {transform:`translateY(-${window.innerHeight-targetY}px)`}
+  ],{duration:1000,easing:"ease-out"});
 
-/* ===== PHÁO HOA NGẪU NHIÊN ===== */
-setInterval(() => {
-  const fw = document.createElement("div");
-  fw.className = "firework";
-  fw.innerHTML = ["🎆","✨","💥","🌟"][Math.floor(Math.random()*4)];
+  setTimeout(()=>{
+    rocket.remove();
+    explode(startX,targetY);
+  },1000);
+}
 
-  fw.style.left = Math.random()*100 + "vw";
-  fw.style.top = Math.random()*100 + "vh";
+/* ===== NỔ PHÁO ===== */
+function explode(x,y){
+  const colors=["#ff4d6d","#ffd166","#7b2cbf","#00f5d4","#ff9f1c"];
 
-  document.body.appendChild(fw);
+  for(let i=0;i<40;i++){
+    const p=document.createElement("div");
+    p.className="particle";
 
-  setTimeout(()=>fw.remove(),1500);
-}, 700);
+    const angle=Math.random()*2*Math.PI;
+    const dist=Math.random()*100+50;
+
+    const dx=Math.cos(angle)*dist;
+    const dy=Math.sin(angle)*dist;
+
+    p.style.left=x+"px";
+    p.style.top=y+"px";
+    p.style.background=colors[Math.random()*colors.length|0];
+
+    document.body.appendChild(p);
+
+    p.animate([
+      {transform:"translate(0,0)",opacity:1},
+      {transform:`translate(${dx}px,${dy}px)`,opacity:0}
+    ],{duration:1200,easing:"ease-out"});
+
+    setTimeout(()=>p.remove(),1200);
+  }
+
+  heartFirework(x,y);
+  textFirework(x,y);
+}
+
+/* ===== PHÁO HÌNH TIM ===== */
+function heartFirework(x,y){
+  for(let t=0;t<Math.PI*2;t+=0.2){
+    const p=document.createElement("div");
+    p.className="particle";
+
+    const dx=16*Math.pow(Math.sin(t),3)*8;
+    const dy=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))*8;
+
+    p.style.left=x+"px";
+    p.style.top=y+"px";
+    p.style.background="pink";
+
+    document.body.appendChild(p);
+
+    p.animate([
+      {transform:"translate(0,0)",opacity:1},
+      {transform:`translate(${dx}px,${dy}px)`,opacity:0}
+    ],{duration:1500});
+
+    setTimeout(()=>p.remove(),1500);
+  }
+}
+
+/* ===== PHÁO CHỮ SƠN ===== */
+function textFirework(x,y){
+  const text="SƠN";
+  for(let i=0;i<text.length;i++){
+    const p=document.createElement("div");
+    p.style.position="fixed";
+    p.style.left=x+"px";
+    p.style.top=y+"px";
+    p.style.color="white";
+    p.style.fontWeight="bold";
+    p.innerText=text[i];
+
+    document.body.appendChild(p);
+
+    p.animate([
+      {transform:"translate(0,0)",opacity:1},
+      {transform:`translate(${i*20-20}px,${-i*20}px)`,opacity:0}
+    ],{duration:1500});
+
+    setTimeout(()=>p.remove(),1500);
+  }
+}
+
+/* ===== LOOP PHÁO ===== */
+setInterval(()=>{
+  launchFirework();
+},1200);
 
 </script>
 
