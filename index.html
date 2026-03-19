@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Sinh nhật Hồng Sơn 🎂</title>
+
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  background:black;
+  overflow:hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== SAO NGẪU NHIÊN ===== */
+.star{
+  position:fixed;
+  color:white;
+  font-size:8px;
+  animation: twinkle 2s infinite alternate;
+  z-index:0;
+}
+@keyframes twinkle{
+  from{opacity:0.2}
+  to{opacity:1}
+}
+
+/* ===== PHÁO HOA ===== */
+.firework{
+  position:fixed;
+  font-size:18px;
+  animation: boom 1.5s ease-out forwards;
+  z-index:1;
+}
+@keyframes boom{
+  0%{transform:scale(0); opacity:1}
+  100%{transform:scale(2.5); opacity:0}
+}
+
+/* ===== CHỮ BAY ===== */
+.text{
+  position:fixed;
+  bottom:-60px;
+  font-size:26px;
+  font-weight:bold;
+  color:#ff9ad5;
+  text-shadow:0 0 10px #ff69b4, 0 0 20px #c77dff;
+  animation: flyUp 18s linear forwards;
+  z-index:2;
+}
+@keyframes flyUp{
+  from{transform:translateY(0); opacity:0}
+  10%{opacity:1}
+  to{transform:translateY(-120vh); opacity:0}
+}
+
+/* ===== BÁNH KEM ===== */
+#cake{
+  position:fixed;
+  bottom:90px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  font-size:42px;
+  z-index:3;
+  color:pink;
+}
+#candle{
+  cursor:pointer;
+  animation: flame .6s infinite alternate;
+}
+@keyframes flame{
+  from{transform:scale(1)}
+  to{transform:scale(1.15)}
+}
+
+/* ===== NÚT NHẠC ===== */
+#playMusic{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:12px 22px;
+  font-size:16px;
+  background:linear-gradient(45deg,#ff69b4,#c77dff);
+  color:white;
+  border:none;
+  border-radius:25px;
+  box-shadow:0 0 15px pink;
+  z-index:10;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BÁNH KEM -->
+<div id="cake">
+  🎂
+  <div id="candle" onclick="blow()">🕯️</div>
+  <p>Thổi nến đi Hồng Sơn ✨</p>
+</div>
+
+<!-- NHẠC -->
+<button id="playMusic">🎵 Bật nhạc piano</button>
+<audio id="bgMusic" loop>
+  <source src="nhac.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* ===== BẬT NHẠC ===== */
+const btn = document.getElementById("playMusic");
+const music = document.getElementById("bgMusic");
+btn.onclick = () => {
+  music.play();
+  btn.style.display = "none";
+};
+
+/* ===== THỔI NẾN ===== */
+function blow(){
+  document.getElementById("candle").innerHTML="💨";
+  alert("🎉 Chúc mừng sinh nhật Hồng Sơn 🎉");
+}
+
+/* ===== CHỮ BAY ===== */
+const messages = [
+  "🎂 Sinh nhật vui vẻ Hồng Sơn",
+  "💖 Chúc Hồng Sơn luôn hạnh phúc",
+  "✨ Tuổi mới nhiều niềm vui",
+  "🌸 Luôn bình an và mỉm cười",
+  "💫 Mong may mắn luôn đến với Sơn",
+  "🌷 Cuộc sống sẽ nhẹ nhàng hơn với Sơn",
+  "💪 Khoẻ mạnh là quan trọng nhất",
+  "🎉 Một năm mới thật dịu dàng và an yên"
+];
+
+setInterval(() => {
+  const text = document.createElement("div");
+  text.className = "text";
+  text.innerText = messages[Math.floor(Math.random()*messages.length)];
+  text.style.left = Math.random()*80 + "vw";
+  document.body.appendChild(text);
+
+  setTimeout(() => {
+    text.remove();
+  }, 18000);
+}, 3000);
+
+/* ===== SAO NGẪU NHIÊN ===== */
+setInterval(() => {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.innerHTML = "✦";
+
+  star.style.left = Math.random()*100 + "vw";
+  star.style.top = Math.random()*100 + "vh";
+  star.style.fontSize = (Math.random()*8 + 6) + "px";
+
+  document.body.appendChild(star);
+
+  setTimeout(()=>star.remove(), 2000);
+}, 200);
+
+/* ===== PHÁO HOA NGẪU NHIÊN ===== */
+setInterval(() => {
+  const fw = document.createElement("div");
+  fw.className = "firework";
+  fw.innerHTML = ["🎆","✨","💥","🌟"][Math.floor(Math.random()*4)];
+
+  fw.style.left = Math.random()*100 + "vw";
+  fw.style.top = Math.random()*100 + "vh";
+
+  document.body.appendChild(fw);
+
+  setTimeout(()=>fw.remove(),1500);
+}, 700);
+
+</script>
+
+</body>
+</html>
